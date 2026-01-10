@@ -5,7 +5,9 @@ A sample Node.js + Express backend project structure to help you understand how 
 This repository demonstrates a clean architecture for building backend applications using Node and Express — ideal for learning, teaching, or starting your own real-world projects.
 
 
-### structure
+##  Project Overview
+
+This repo is designed for developers who want to understand how a backend project can be organized in a clear and scalable way. It includes directories like:
 
 ```text
 ├── controllers
