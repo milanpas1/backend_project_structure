@@ -9,14 +9,14 @@ This repository demonstrates a clean architecture for building backend applicati
 
 This repo is designed for developers who want to understand how a backend project can be organized in a clear and scalable way. It includes directories like:
 
-├── controllers 
+```├── controllers 
 ├── routes
 ├── services
 ├── data
 ├── app.js
 ├── server.js
 ├── package.json
-└── .gitignore
+└── .gitignore```
 
 
 
