@@ -16,7 +16,8 @@ This repo is designed for developers who want to understand how a backend projec
 ├── app.js
 ├── server.js
 ├── package.json
-└── .gitignore```
+└── .gitignore
+```
 
 
 
