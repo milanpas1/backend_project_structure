@@ -4,7 +4,6 @@ A sample Node.js + Express backend project structure to help you understand how 
 
 This repository demonstrates a clean architecture for building backend applications using Node and Express — ideal for learning, teaching, or starting your own real-world projects.
 
----
 
 ## 📁 Project Overview
 
@@ -27,21 +26,21 @@ This repo is designed for developers who want to understand how a backend projec
 server → app → userRouter → userController → userService
 
 ### server
--> Entry point of app
--> uses the app
--> listens on the specific port
+- Entry point of app
+- uses the app
+- listens on the specific port
 
 ### app
--> contains all the routes used in the project
--> registers middlewares
+- contains all the routes used in the project
+- registers middlewares
 
 ### userService
--> contains all functions used in userController
--> handles core logic
+- contains all functions used in userController
+- handles core logic
 
 ### userController
--> calls services
--> contains callback functions that are called when client send get/post/delete requests
+- calls services
+- contains callback functions that are called when client send get/post/delete requests
 
 ### userRouter
--> routers callback function with their respective request types
+- routers callback function with their respective request types
