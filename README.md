@@ -17,6 +17,8 @@ This repository demonstrates a clean architecture for building backend applicati
 ├── package.json
 └── .gitignore
 
+```
+
 
 *This structure is particularly useful for job projects, personal APIs, and real-world applications.*
 
