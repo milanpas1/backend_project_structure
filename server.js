@@ -1,9 +1,11 @@
-const app= require("./app");
+const express = require("express");
+const app = require("./app");
 
-const PORT= 3000;
+app.use(express.json()); // Add this line to parse JSON request bodies
+app.use(express.urlencoded({ extended: true })); // Add this for form data
 
-app.listen(PORT, ()=>{
-    console.log(`Server is running on http://localhost:${PORT}`);
-    
-    
-})
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
