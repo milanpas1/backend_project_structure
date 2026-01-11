@@ -1,49 +1,30 @@
 const userService = require("../services/user.service");
 
-exports.getAllUsers = (req, res) => {
-  const users = userService.getAll();
-  res.json(users);
-};
+async function createUser(req, res, next) {
+  try {
+    const { name, email } = req.body;
 
-exports.createUser = (req, res) => {
-  const { name, email } = req.body;
+    if (!name || !email) {
+      return res.status(400).json({ message: "name and email required" });
+    }
 
-  if (!name || !email) {
-    return res.status(400).json({ error: "name and email required" });
+    const user = await userService.createUser({ name, email });
+    res.status(201).json(user);
+  } catch (err) {
+    next(err);
   }
+}
 
-  const user = userService.create({ name, email });
-
-  res.status(201).json(user);
-};
-
-exports.getUserById = (req, res) => {
-  const id = Number(req.params.id);
-  const user = userService.getById(id);
-
-  if (!user) {
-    return res.status(404).json({ error: "User not found" });
+async function getUsers(req, res, next) {
+  try {
+    const users = await userService.getAllUsers();
+    res.json(users);
+  } catch (err) {
+    next(err);
   }
+}
 
-  res.json(user);
-};
-
-exports.remove = (id) => {
-  const index = users.findIndex((u) => u.id === id);
-  if (index === -1) return false;
-
-  users.splice(index, 1);
-  saveUsers();
-  return true;
-};
-
-exports.deleteUser = (req, res) => {
-  const id = Number(req.params.id);
-  const deleted = userService.remove(id);
-
-  if (!deleted) {
-    return res.status(404).json({ error: "User not found" });
-  }
-
-  res.status(204).send();
+module.exports = {
+  createUser,
+  getUsers,
 };
