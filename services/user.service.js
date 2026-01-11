@@ -1,45 +1,26 @@
-const fs= require("fs");
-const path = require("path")
+const pool = require("../db");
 
-const DATA_FILE= path.join(__dirname, "../data/users.json")
+async function createUser({ name, email }) {
+  const query = `
+    INSERT INTO users (name, email)
+    VALUES ($1, $2)
+    RETURNING id, name, email, created_at
+  `;
 
-let users= []
-let nextId=1;
+  const values = [name, email];
 
-function loadUsers(){
-    try{
-        const data = fs.readFileSync(DATA_FILE, "utf-8")
-        users= JSON.parse(data)
-        nextId= users.reduce((max,u)=>Math.max(max,u.id),0)+1;
-
-    } catch{
-        users= [];
-        nextId= 1;
-    }
+  const result = await pool.query(query, values);
+  return result.rows[0];
 }
 
-function saveUsers() {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(users, null, 2));
+async function getAllUsers() {
+  const result = await pool.query(
+    "SELECT id, name, email, created_at FROM users ORDER BY id"
+  );
+  return result.rows;
 }
 
-loadUsers();
-
-exports.getAll = () => users;
-
-exports.getById = id => users.find(u => u.id === id);
-
-exports.create = ({ name, email }) => {
-  const user = { id: nextId++, name, email };
-  users.push(user);
-  saveUsers();
-  return user;
-};
-
-exports.remove = id => {
-  const index = users.findIndex(u => u.id === id);
-  if (index === -1) return false;
-
-  users.splice(index, 1);
-  saveUsers();
-  return true;
+module.exports = {
+  createUser,
+  getAllUsers,
 };
